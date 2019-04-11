@@ -3,7 +3,8 @@ import tornado.ioloop
 import tornado.web
 from sql import insert_to_sql
 from datetime import datetime as dt
-mac = "E817557FE91B"
+
+allowed_beacons = ['E7DEEF8685B7', 'D4E16B84153D']
 
 class Hello(tornado.web.RequestHandler):
     def get(self):
@@ -30,9 +31,13 @@ class Post(tornado.web.RequestHandler):
                 else:
                     js["timestamp"] = dt.strptime(
                         js["timestamp"], '%Y-%m-%dT%H:%M:%SZ')
+
                     sensId = js["mac"]
+                    if sensId not in allowed_beacons:
+                        continue
+                    print('data',js)
                     try:
-                        insert_to_sql(int(js["rssi"]),sensId,beamId,js["timestamp"])
+                        insert_to_sql(int(js["rssi"]),sensId,beamId,js["timestamp"],js["ibeaconUuid"],js["ibeaconMajor"],js["ibeaconMinor"])
                     except Exception as e:
                         print("exception:",e)
         except Exception as e:
