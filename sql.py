@@ -3,7 +3,7 @@ import pymysql
 def insert_to_sql(rssi, sensor, beamer, time,uuid,major,minor):
     try:
         db = pymysql.connect(host="localhost", port=3306,
-                             user="psigel", passwd="beaconsbeacons", db="beacons")
+                             user="psigel", passwd="beaconsbeacons", db="fast_data")
     except Exception as e:
         print("error tratando de conectar a DB")
         print(e)
@@ -20,7 +20,7 @@ def insert_to_sql(rssi, sensor, beamer, time,uuid,major,minor):
 def get_data(limit):
     try:
         db = pymysql.connect(host="localhost", port=3306,
-                             user="psigel", passwd="beaconsbeacons", db="beacons")
+                             user="psigel", passwd="beaconsbeacons", db="fast_data")
     except Exception as e:
         print("error tratando de conectar a DB")
         print(e)
