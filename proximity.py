@@ -4,7 +4,7 @@ import tornado.web
 from sql import insert_to_sql
 from datetime import datetime as dt
 
-allowed_beacons = ['E7DEEF8685B7', 'D4E16B84153D']
+allowed_beacons = ['E7DEEF8685B7', 'D4E16B84153D', 'EE6630AB3C8D', 'C4712E94C47B', 'E82573E39FF2']
 
 class Hello(tornado.web.RequestHandler):
     def get(self):
@@ -45,7 +45,7 @@ class Post(tornado.web.RequestHandler):
 
 application = tornado.web.Application([
     (r"/", Hello),
-    (r"/post", Post),
+    (r"/status", Post),
 ])
 
 if __name__ == "__main__":
